@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>U.S. Outage Monitor</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#incidents">Skip to incidents</a>
+
+<header class="cmdbar">
+  <div class="brand">
+    <span class="emblem" aria-hidden="true"><span></span></span>
+    <div>
+      <h1>U.S. Outage Monitor</h1>
+      <p class="brand-sub">Public-source incident intelligence</p>
+    </div>
+  </div>
+  <dl class="sys">
+    <div class="sys-item"><dt>Poller</dt><dd><span class="dot" id="poller-dot" aria-hidden="true"></span><span id="poller-state">—</span></dd></div>
+    <div class="sys-item"><dt>Last checked</dt><dd><span id="last-checked">—</span> <span class="age" id="last-checked-age"></span></dd></div>
+    <div class="sys-item"><dt>Reporting window</dt><dd id="window-short">—</dd></div>
+    <div class="sys-item"><dt>Time zone</dt><dd>ET (America/New_York)</dd></div>
+  </dl>
+</header>
+
+<nav class="secnav" aria-label="Dashboard sections">
+  <a href="#overview">Overview</a>
+  <a href="#incidents">Incidents</a>
+  <a href="#alerts">Alerts</a>
+  <a href="#sources">Sources</a>
+  <a href="#labels">Label guide</a>
+</nav>
+
+<main>
+  <section id="banners" class="advisories" aria-live="polite" aria-label="System notices"></section>
+
+  <!-- ============================================================ OVERVIEW -->
+  <section id="overview" class="block" aria-labelledby="h-overview">
+    <div class="block-head">
+      <h2 id="h-overview">Overview</h2>
+      <p class="block-note" id="window-label">Loading reporting window…</p>
+    </div>
+    <div class="kpis" id="kpis" role="list"></div>
+
+    <div class="viz-grid">
+      <figure class="viz viz-wide" aria-labelledby="t-spans">
+        <figcaption>
+          <h3 id="t-spans">Incident spans</h3>
+          <p>Event start → end in ET, for incidents with a recorded start inside the reporting window. Colour = evidence class.</p>
+        </figcaption>
+        <div class="legend-row" id="spans-legend"></div>
+        <div class="chart" id="chart-spans"></div>
+        <details class="tableview"><summary>View as table</summary><div id="table-spans"></div></details>
+      </figure>
+
+      <figure class="viz" aria-labelledby="t-daily">
+        <figcaption>
+          <h3 id="t-daily">First reports per day</h3>
+          <p>Incident candidates by the ET date they were first reported, stacked by evidence class.</p>
+        </figcaption>
+        <div class="legend-row" id="daily-legend"></div>
+        <div class="chart" id="chart-daily"></div>
+        <details class="tableview"><summary>View as table</summary><div id="table-daily"></div></details>
+      </figure>
+
+      <figure class="viz" aria-labelledby="t-sev">
+        <figcaption>
+          <h3 id="t-sev">Severity mix</h3>
+          <p>Candidates in the window by operator-assigned severity. Unreviewed items stay "unknown".</p>
+        </figcaption>
+        <div class="meters" id="chart-severity"></div>
+      </figure>
+
+      <figure class="viz" aria-labelledby="t-fresh">
+        <figcaption>
+          <h3 id="t-fresh">Feed freshness</h3>
+          <p>Minutes since each enabled feed last succeeded. The tick marks its stale threshold (3 × poll interval).</p>
+        </figcaption>
+        <div class="meters" id="chart-freshness"></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ INCIDENTS -->
+  <section id="incidents" class="block" aria-labelledby="h-incidents">
+    <div class="block-head">
+      <h2 id="h-incidents">Incidents</h2>
+      <button type="button" class="ghost filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filters">Filters <span id="filter-count"></span></button>
+    </div>
+
+    <form id="filters" class="filters" aria-label="Filter incidents">
+      <label>From (ET)<input type="date" name="date_from"></label>
+      <label>To (ET)<input type="date" name="date_to"></label>
+      <label>Severity<select name="severity"><option value="">Any</option><option>critical</option><option>high</option><option>moderate</option><option>low</option><option>unknown</option></select></label>
+      <label>Confidence<select name="confidence"><option value="">Any</option><option>high</option><option>medium</option><option>low</option></select></label>
+      <label>Sector<select name="sector"><option value="">Any</option><option>cloud</option><option>aviation</option><option>banking</option><option>software</option><option>internet_infrastructure</option><option>telecom</option><option>news</option><option>unknown</option></select></label>
+      <label>Status<select name="status"><option value="">Any</option><option>ongoing</option><option>monitoring</option><option>resolved</option><option>unknown</option></select></label>
+      <label>Evidence<select name="evidence_class"><option value="">Any</option><option value="confirmed">Confirmed</option><option value="attributed">Attributed report</option><option value="unverified">Unverified signal</option><option value="dismissed">Dismissed</option></select></label>
+      <label class="grow">Service / organization<input type="search" name="q" maxlength="100" placeholder="e.g. Microsoft, Exchange"></label>
+      <div class="actions">
+        <button type="submit" class="primary">Apply</button>
+        <button type="button" id="window-btn">Reporting window</button>
+        <button type="reset" class="ghost">Clear</button>
+      </div>
+    </form>
+
+    <div class="lane-switch" role="tablist" aria-label="Evidence lanes">
+      <button type="button" role="tab" data-lane="confirmed" aria-selected="true">Confirmed <span class="n" data-n="confirmed"></span></button>
+      <button type="button" role="tab" data-lane="attributed" aria-selected="false">Attributed <span class="n" data-n="attributed"></span></button>
+      <button type="button" role="tab" data-lane="unverified" aria-selected="false">Unverified <span class="n" data-n="unverified"></span></button>
+    </div>
+
+    <div class="lanes" id="lanes" data-active="confirmed">
+      <section aria-labelledby="h-confirmed" class="lane lane-confirmed" data-lane="confirmed">
+        <h3 id="h-confirmed" class="lane-head"><span class="ev-mark" aria-hidden="true">✔</span>Confirmed incidents <span class="count" id="n-confirmed"></span></h3>
+        <p class="lane-note">Operator-confirmed with primary or independent evidence.</p>
+        <div id="list-confirmed" class="list"></div>
+      </section>
+      <section aria-labelledby="h-attributed" class="lane lane-attributed" data-lane="attributed">
+        <h3 id="h-attributed" class="lane-head"><span class="ev-mark" aria-hidden="true">◐</span>Attributed reports <span class="count" id="n-attributed"></span></h3>
+        <p class="lane-note">Reported by a named source; not yet confirmed.</p>
+        <div id="list-attributed" class="list"></div>
+      </section>
+      <section aria-labelledby="h-unverified" class="lane lane-unverified" data-lane="unverified">
+        <h3 id="h-unverified" class="lane-head"><span class="ev-mark" aria-hidden="true">⚠</span>Unverified signals <span class="count" id="n-unverified"></span></h3>
+        <p class="lane-note warn-note">Machine-collected and unreviewed. Not confirmed incidents.</p>
+        <div id="list-unverified" class="list"></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ============================================================ ALERTS -->
+  <section id="alerts" class="block" aria-labelledby="h-alerts">
+    <div class="block-head">
+      <h2 id="h-alerts">Alert history</h2>
+      <p class="block-note" id="alerts-note"></p>
+    </div>
+    <div class="table-wrap"><table id="alerts-table" class="grid">
+      <thead><tr><th scope="col">Last seen (ET)</th><th scope="col">Kind</th><th scope="col">Incident</th><th scope="col">Message</th><th scope="col" class="num">Seen</th><th scope="col">Acknowledged</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <!-- ============================================================ SOURCES -->
+  <section id="sources" class="block" aria-labelledby="h-sources">
+    <div class="block-head">
+      <h2 id="h-sources">Sources</h2>
+      <p class="block-note" id="source-summary"></p>
+    </div>
+    <div class="table-wrap"><table id="sources-table" class="grid">
+      <caption class="sr-only">Configured feeds and their poll status</caption>
+      <thead><tr><th scope="col">Source</th><th scope="col">Tier</th><th scope="col">State</th><th scope="col">Last success (ET)</th><th scope="col">Last error</th><th scope="col">Terms / notes</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="fine">The poller fetches only the feeds listed in <code>sources.json</code>. The dashboard cannot add feeds.</p>
+  </section>
+
+  <!-- ============================================================ LEGEND -->
+  <section id="labels" class="block" aria-labelledby="h-labels">
+    <div class="block-head"><h2 id="h-labels">Label guide</h2></div>
+    <div class="legend">
+      <div><h3>Evidence class</h3><ul>
+        <li><span class="chip ev-confirmed">✔ Confirmed</span> An operator confirmed it, backed by a primary source or two independent publishers.</li>
+        <li><span class="chip ev-attributed">◐ Attributed</span> Reported by a named source, not yet confirmed.</li>
+        <li><span class="chip ev-unverified">⚠ Unverified</span> Machine-collected item awaiting review. Never treat it as fact.</li></ul></div>
+      <div><h3>Severity <span class="muted">(operator-set)</span></h3><ul>
+        <li><span class="chip sev-critical">▲▲▲▲ Critical</span> Safety-relevant or nationwide halt of critical infrastructure.</li>
+        <li><span class="chip sev-high">▲▲▲ High</span> Nationwide or multi-sector loss of a widely used service for hours.</li>
+        <li><span class="chip sev-moderate">▲▲ Moderate</span> Broad but partial or degraded service.</li>
+        <li><span class="chip sev-low">▲ Low</span> Limited users, components or regions.</li>
+        <li><span class="chip sev-unknown">? Unknown</span> Not enough evidence to judge.</li></ul></div>
+      <div><h3>Confidence <span class="muted">(computed)</span></h3><ul>
+        <li><span class="chip conf">●●● High</span> Confirmed with primary or independent evidence, and recent.</li>
+        <li><span class="chip conf">●●○ Medium</span> Primary source or two independent publishers, not yet confirmed, or evidence aging.</li>
+        <li><span class="chip conf">●○○ Low</span> Single source, crowd reports or forum items only.</li></ul></div>
+    </div>
+  </section>
+</main>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+<dialog id="detail" aria-labelledby="d-title">
+  <div class="dialog-head">
+    <div>
+      <p class="eyebrow" id="d-eyebrow">Incident</p>
+      <h2 id="d-title">Incident</h2>
+    </div>
+    <button type="button" id="close-detail" class="ghost" aria-label="Close incident detail">Close ✕</button>
+  </div>
+  <div id="d-body"></div>
+</dialog>
+
+<footer class="foot">
+  <p>No map is shown: this MVP has no verified location data. Scope is text with its basis (confirmed, reported or unknown). Location is never inferred from a company's headquarters.</p>
+</footer>
+</body>
+</html>

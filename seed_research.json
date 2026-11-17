@@ -1,0 +1,477 @@
+{
+  "meta": {
+    "analyst": "analyst:claude-research",
+    "compiled_at": "2026-11-17T21:00:00Z",
+    "window": "2026-11-10 00:00 ET to 2026-11-17 00:00 ET (end exclusive)",
+    "method": "Web search and page fetches on 2026-11-17. Official/agency pages fetched directly where possible (FAA). Microsoft and bank statements were NOT read on the companies' own channels; they are taken from news reports that quote them, and are marked as such.",
+    "excluded": [
+      "Apple outage reported by BleepingComputer on 2026-11-17: outside the window (after it ended).",
+      "United Airlines 'brief system outage' mentioned in an Al Jazeera subheading on 2026-11-16: no time, cause or duration found; not verified.",
+      "Westpac outage on 2026-11-10: Australia, no U.S. impact found.",
+      "Several GitHub status incidents in the window (official feed): component-level degradations, below this brief's severity threshold."
+    ]
+  },
+  "incidents": [
+    {
+      "slug": "microsoft-365-2026-11-12",
+      "title": "Microsoft 365 outage: Exchange Online/Outlook, Teams, Copilot and others",
+      "organization": "Microsoft",
+      "service": "Microsoft 365 (Exchange Online, Teams, SharePoint, Copilot, Intune, Defender)",
+      "sector": "cloud",
+      "evidence_class": "confirmed",
+      "severity": "high",
+      "scope": "national",
+      "scope_basis": "reported",
+      "scope_detail": "Microsoft first described impact in the Americas, then said users in any region could be affected. U.S. reach is reported by AP and others; no state-level data.",
+      "status": "resolved",
+      "event_start": "2026-11-12T17:46:00Z",
+      "event_start_approx": true,
+      "event_end": "2026-11-14T09:33:00Z",
+      "event_end_approx": true,
+      "first_reported": "2026-11-12T17:46:00Z",
+      "last_source_update": "2026-11-14T09:33:00Z",
+      "inclusion_reason": "Broad multi-day disruption of a core U.S. business and government platform, corroborated by AP and Reuters, with Microsoft statements quoted by both.",
+      "impact": "Email, calendar and collaboration outages. AP reported nearly 130,000 Downdetector reports (crowd reports, not a count of affected users). Example of U.S. local government impact: Arapahoe County, Colo. sheriff's office reported problems with online bond payments (AP).",
+      "sources": [
+        {
+          "id": "mirror",
+          "tier": "forum",
+          "publisher": "WindowsForum (citing an Earlham College M365 status mirror)",
+          "title": "Exchange Online outage: failed health checks and how to track EX1550543",
+          "url": "https://windowsforum.com/news/exchange-online-outage-failed-health-checks-and-how-to-track-ex1550543.452127/",
+          "published_at": "2026-11-12T00:00:00Z",
+          "note": "Gives incident ID EX1550543 and a 17:46 UTC timestamp. Third-party mirror, not Microsoft's own page."
+        },
+        {
+          "id": "bleeping",
+          "tier": "news",
+          "publisher": "BleepingComputer",
+          "title": "Massive Microsoft 365 outage disrupts Outlook, Teams, Copilot worldwide",
+          "url": "https://bleepingcomputer.com/news/microsoft/massive-microsoft-365-outage-disrupts-outlook-teams-copilot-worldwide",
+          "published_at": "2026-11-12T20:15:00Z"
+        },
+        {
+          "id": "wtvd",
+          "tier": "news",
+          "publisher": "ABC11 / WTVD",
+          "title": "Microsoft outage live updates",
+          "url": "https://abc11.com/live-updates/microsoft-outage-live-updates-what-know-outlook-365-other-apps-remain-down/20036817/",
+          "published_at": "2026-11-13T02:02:00Z",
+          "note": "Last updated 2:02 AM GMT Nov 13; quotes Microsoft statements."
+        },
+        {
+          "id": "reuters",
+          "tier": "news",
+          "publisher": "Reuters (via GV Wire)",
+          "title": "Hours-Long Microsoft Outage Disrupts Businesses, Governments Globally",
+          "url": "https://gvwire.com/?p=277812",
+          "published_at": "2026-11-13T15:48:12Z"
+        },
+        {
+          "id": "ap",
+          "tier": "news",
+          "publisher": "Associated Press (via Live 5 News)",
+          "title": "Microsoft says services fully restored after hourslong global outage",
+          "url": "https://www.live5news.com/2026/11/14/microsoft-says-services-fully-restored-after-hourslong-global-outage/",
+          "published_at": "2026-11-14T09:33:00Z"
+        },
+        {
+          "id": "thenews",
+          "tier": "news",
+          "publisher": "The News International",
+          "title": "Microsoft outage leaves Outlook, Teams, Copilot disrupted for 11 hours",
+          "url": "https://www.thenews.com.pk/latest/1423454-microsoft-outage-leaves-outlook-teams-copilot-disrupted-for-11-hours-heres-what-happened",
+          "published_at": "2026-11-13T00:00:00Z"
+        },
+        {
+          "id": "slashdot",
+          "tier": "forum",
+          "publisher": "Slashdot (reader update)",
+          "title": "Microsoft Outlook Goes Down Nationwide [UPDATE]",
+          "url": "https://tech.slashdot.org/story/26/11/12/1959220/",
+          "published_at": "2026-11-12T20:29:00Z"
+        },
+        {
+          "id": "wealthpro",
+          "tier": "news",
+          "publisher": "Wealth Professional (citing CU Today)",
+          "title": "Microsoft outage strands financial firms without email for hours",
+          "url": "https://www.wealthprofessional.ca/news/industry-news/microsoft-outage-strands-financial-firms-without-email-for-hours/394012",
+          "published_at": "2026-11-13T00:00:00Z"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-11-12T17:46:00Z",
+          "evidence": "attributed",
+          "source": "mirror",
+          "text": "EX1550543 posted: users may be unable to connect to Exchange Online mailboxes (timestamp from a third-party status mirror)."
+        },
+        {
+          "at": "2026-11-12T20:15:00Z",
+          "evidence": "attributed",
+          "source": "bleeping",
+          "text": "BleepingComputer reports a widespread M365 outage and a separate Teams incident earlier the same day in the Americas."
+        },
+        {
+          "at": "2026-11-12T23:38:00Z",
+          "evidence": "attributed",
+          "source": "wtvd",
+          "text": "Microsoft says it is returning a portion of affected servers to service and they remain stable (as quoted by WTVD)."
+        },
+        {
+          "at": "2026-11-13T02:02:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "wtvd",
+          "text": "Microsoft says a process that establishes secure connections became overwhelmed, so servers stopped processing requests (as quoted by WTVD)."
+        },
+        {
+          "at": "2026-11-13T15:48:00Z",
+          "evidence": "attributed",
+          "source": "reuters",
+          "text": "Reuters: Microsoft says a broader rollout of fixes is starting to stabilize the system; it says it is not aware of malicious activity."
+        },
+        {
+          "at": "2026-11-14T09:33:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "ap",
+          "text": "AP: Microsoft says services are fully restored. It attributes the incident to an issue from an earlier network capacity upgrade that surfaced after a recent network change, and says it was not a cyberattack."
+        }
+      ],
+      "claims": [
+        {
+          "claim": "The outage was not caused by a cyberattack.",
+          "claimant": "Microsoft (quoted by AP and Reuters)",
+          "date": "2026-11-14",
+          "verdict": "supported",
+          "source": "ap",
+          "rationale": "Microsoft's stated position, reported independently by AP and Reuters. This is the vendor's assessment, not an independent forensic finding; the post-incident report had not been located as of Nov 17."
+        },
+        {
+          "claim": "Outlook, Teams and Copilot were disrupted 'for 11 hours'.",
+          "claimant": "The News International (headline)",
+          "date": "2026-11-13",
+          "verdict": "misleading",
+          "source": "thenews",
+          "rationale": "Severe disruption lasted roughly half a day, but Microsoft did not declare full restoration until Saturday, Nov 14 (AP). The figure depends on what is measured and leaves out the long recovery."
+        },
+        {
+          "claim": "'Much of the major services are down. AWS, Microsoft, Meta… Clearly not a Microsoft thing.'",
+          "claimant": "Slashdot reader update",
+          "date": "2026-11-12",
+          "verdict": "contradicted",
+          "source": "slashdot",
+          "rationale": "Microsoft acknowledged a fault in its own Exchange Online service and later gave a network-change cause. Downdetector spikes for other brands during large outages often reflect dependent services or user confusion. No AWS or Meta acknowledgement was found."
+        },
+        {
+          "claim": "The outage disrupted U.S. banks.",
+          "claimant": "Wealth Professional (citing CU Today); other outlets say 'banks' generally",
+          "date": "2026-11-13",
+          "verdict": "unresolved",
+          "source": "wealthpro",
+          "rationale": "Reports describe email and collaboration disruption at financial institutions in the U.S. and Canada. AP names only Hong Kong banks. No named U.S. bank confirmed customer-facing impact from this incident in the sources reviewed."
+        }
+      ]
+    },
+    {
+      "slug": "faa-ground-stop-2026-11-13",
+      "title": "FAA nationwide ground stop after air traffic control telecommunications failure",
+      "organization": "FAA",
+      "service": "Air traffic control communications (FTI network, en route centers)",
+      "sector": "aviation",
+      "evidence_class": "confirmed",
+      "severity": "critical",
+      "scope": "national",
+      "scope_basis": "confirmed",
+      "scope_detail": "FAA: instability began at 17 of 22 Air Route Traffic Control Centers and spread to several TRACONs. Every U.S. departure was held.",
+      "status": "resolved",
+      "event_start": "2026-11-13T20:30:00Z",
+      "event_start_approx": true,
+      "event_end": "2026-11-14T01:15:00Z",
+      "event_end_approx": false,
+      "first_reported": "2026-11-13T20:54:00Z",
+      "last_source_update": null,
+      "inclusion_reason": "Nationwide halt of U.S. departures with a safety dimension. Primary source: FAA Q&A page dated Nov 15, 2026 (no time given). The ground stop ended Nov 13; the root-cause investigation is open.",
+      "impact": "FAA: about 3,500 aircraft were airborne when the stop was issued and all landed safely. About 12,462 flights were canceled (9,082 by major airlines); the FAA says not all were directly caused by the ground stop.",
+      "sources": [
+        {
+          "id": "faa",
+          "tier": "agency",
+          "publisher": "Federal Aviation Administration",
+          "title": "Nationwide Ground Stop: Questions and Answers",
+          "url": "https://www.faa.gov/newsroom/nationwide-ground-stop-questions-and-answers",
+          "published_at": "2026-11-15T05:00:00Z",
+          "note": "Page shows the date Sun Nov 15, 2026 only; the time is a placeholder for midnight ET."
+        },
+        {
+          "id": "csm",
+          "tier": "news",
+          "publisher": "Christian Science Monitor (Reuters reporting)",
+          "title": "FAA grounds flights nationwide, citing communications outage",
+          "url": "https://www.csmonitor.com/Business/2026/1113/faa-nationwide-ground-stop-airlines",
+          "published_at": "2026-11-13T00:00:00Z"
+        },
+        {
+          "id": "aircurrent",
+          "tier": "news",
+          "publisher": "The Air Current",
+          "title": "Duffy blames L3Harris routine maintenance for ground stop",
+          "url": "https://theaircurrent.com/?p=34856",
+          "published_at": "2026-11-14T00:00:00Z"
+        },
+        {
+          "id": "star",
+          "tier": "news",
+          "publisher": "Reuters (via The Star)",
+          "title": "US aviation shutdown blamed on L3 Harris installed router",
+          "url": "https://www.thestar.com.my/news/world/2026/11/15/us-aviation-shutdown-blamed-on-l3-harris-installed-router",
+          "published_at": "2026-11-15T00:00:00Z"
+        },
+        {
+          "id": "twz",
+          "tier": "news",
+          "publisher": "The War Zone (citing CNN)",
+          "title": "FAA Orders Ground Stop For All Flights Across The U.S. (Updated)",
+          "url": "https://www.twz.com/air/faa-orders-ground-stop-for-all-flights-across-the-u-s",
+          "published_at": "2026-11-13T00:00:00Z"
+        },
+        {
+          "id": "mte",
+          "tier": "news",
+          "publisher": "Make Tech Easier",
+          "title": "Nationwide FAA ground stop",
+          "url": "https://maketecheasier.com/?p=863896",
+          "published_at": "2026-11-13T22:32:00Z"
+        },
+        {
+          "id": "political",
+          "tier": "news",
+          "publisher": "Political.org",
+          "title": "Nationwide aviation shutdown that disrupted 20,000+ flights traced to single router",
+          "url": "https://political.org/2026/11/15/transportation-secretary-sean-duffy-says-nationwide-ground-stop-may-trace-to-faulty-router-or-contractor-error/",
+          "published_at": "2026-11-15T00:00:00Z"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-11-13T20:30:00Z",
+          "approx": true,
+          "evidence": "confirmed",
+          "source": "faa",
+          "text": "About 3:30 p.m. ET: the FAA has a technical problem that leads to a nationwide ground stop."
+        },
+        {
+          "at": "2026-11-13T20:54:00Z",
+          "evidence": "attributed",
+          "source": "csm",
+          "text": "3:54 p.m. ET: nationwide ground stop announced, shortly after Chicago traffic was halted over ATC communications issues."
+        },
+        {
+          "at": "2026-11-13T22:00:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "mte",
+          "text": "Before about 5:30 p.m. ET: Homeland Security Secretary Mullin says there is no indication of a nefarious attack and no link to the Microsoft outage."
+        },
+        {
+          "at": "2026-11-14T01:15:00Z",
+          "evidence": "confirmed",
+          "source": "faa",
+          "text": "8:15 p.m. ET: the system is stabilized and air traffic resumes."
+        },
+        {
+          "at": "2026-11-14T15:00:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "aircurrent",
+          "text": "Saturday briefing: Transportation Secretary Duffy ties the trigger to L3Harris copper-to-fiber work and a router flooding the network; he says it is undetermined whether the router or the installation was at fault."
+        },
+        {
+          "at": "2026-11-15T05:00:00Z",
+          "approx": true,
+          "evidence": "confirmed",
+          "source": "faa",
+          "text": "FAA Q&A (dated Nov 15): legacy equipment destabilized when the FTI network was flooded at about 1,000 connection attempts every 4–5 seconds. Two possible sources: a radar site in Amarillo, Texas, and a radio site in El Dorado, Arkansas, where L3Harris was deploying a new router. No indication of a cyberattack. Root cause still under investigation."
+        }
+      ],
+      "claims": [
+        {
+          "claim": "There is no indication of a cyberattack.",
+          "claimant": "FAA; DHS Secretary Mullin",
+          "date": "2026-11-15",
+          "verdict": "supported",
+          "source": "faa",
+          "rationale": "Stated on the FAA's own page. Mullin also said this but, per CNN as reported by Gray News, did not rule out any cause. 'No indication' is not a finding that a cyberattack has been excluded."
+        },
+        {
+          "claim": "'US aviation shutdown blamed on L3 Harris installed router.'",
+          "claimant": "Reuters headline (via The Star)",
+          "date": "2026-11-15",
+          "verdict": "misleading",
+          "source": "star",
+          "rationale": "Accurately reports the Secretary's attribution. But the FAA lists two possible source sites, and both the FAA and Duffy say the root cause, including router fault versus installation error, is still undetermined. The headline compresses an open question."
+        },
+        {
+          "claim": "The problem is believed to have started at Chicago Midway and cascaded nationwide.",
+          "claimant": "CNN early reporting (quoted by The War Zone)",
+          "date": "2026-11-13",
+          "verdict": "contradicted",
+          "source": "twz",
+          "rationale": "The FAA's Nov 15 account points to remote sites in Texas and Arkansas. Chicago was where traffic was halted first, which plausibly explains the early report. This was an early-reporting error, not evidence of bad faith."
+        },
+        {
+          "claim": "More than 20,000 flights were disrupted.",
+          "claimant": "Political.org",
+          "date": "2026-11-15",
+          "verdict": "unresolved",
+          "source": "political",
+          "rationale": "The FAA's figure is about 12,462 cancellations, not all directly caused by the stop. 'Disrupted' may also count delays; no authoritative combined figure was found."
+        },
+        {
+          "claim": "The FAA outage was not connected to the Microsoft outage.",
+          "claimant": "DHS Secretary Mullin (reported)",
+          "date": "2026-11-13",
+          "verdict": "supported",
+          "source": "mte",
+          "rationale": "Consistent with the FAA's own network-based account. No source reviewed links the two events beyond timing."
+        }
+      ]
+    },
+    {
+      "slug": "us-banks-2026-11-16",
+      "title": "JPMorgan Chase transaction delays; complaint spikes at other U.S. banks and Zelle",
+      "organization": "JPMorgan Chase",
+      "service": "Online banking and transfers, including transfers involving other banks",
+      "sector": "banking",
+      "evidence_class": "confirmed",
+      "severity": "moderate",
+      "scope": "national",
+      "scope_basis": "reported",
+      "scope_detail": "Downdetector complaints came from across the U.S. There is no state-level data. Whether other banks had separate faults is disputed.",
+      "status": "resolved",
+      "event_start": "2026-11-16T14:00:00Z",
+      "event_start_approx": true,
+      "event_end": "2026-11-17T11:00:00Z",
+      "event_end_approx": true,
+      "first_reported": "2026-11-16T19:18:10Z",
+      "last_source_update": "2026-11-17T14:44:00Z",
+      "inclusion_reason": "Chase confirmed a technical issue that slowed transactions on Monday, Nov 16 (inside the window); two independent outlets quote Chase. The 'resolved' status rests on Downdetector returning to normal early Tuesday (CBS); no official Chase all-clear was found.",
+      "impact": "Chase said some transactions took longer than usual and customers kept access to their accounts and funds. CBS: about 4,800 Downdetector reports for Chase as of 2 p.m. ET. Al Jazeera: more than 800 reports for Wells Fargo.",
+      "sources": [
+        {
+          "id": "cbs",
+          "tier": "news",
+          "publisher": "CBS News",
+          "title": "Widespread service outages at major U.S. banks appear to be over",
+          "url": "https://www.cbsnews.com/news/banks-online-service-outages-jpmorgan-chase-bank-of-america-wells-fargo/",
+          "published_at": "2026-11-17T14:44:00Z",
+          "note": "Updated Nov 17, 2026, 9:44 AM EST. Quotes Chase, Bank of America, U.S. Bank, Capital One and Zelle."
+        },
+        {
+          "id": "aj",
+          "tier": "news",
+          "publisher": "Al Jazeera",
+          "title": "Thousands report online outages at major US banks",
+          "url": "https://www.aljazeera.com/news/2026/11/16/thousands-report-difficulties-accessing-accounts-online-at-major-us-banks",
+          "published_at": "2026-11-16T19:18:10Z",
+          "note": "Time taken from page metadata; the page does not state a time zone (UTC assumed)."
+        },
+        {
+          "id": "yahoo4",
+          "tier": "news",
+          "publisher": "Yahoo News (syndicated)",
+          "title": "Customers of at least 4 major US banks report outages days after Microsoft issues",
+          "url": "https://www.yahoo.com/news/us/articles/customers-major-us-banks-report-190200382.html",
+          "published_at": "2026-11-16T20:31:00Z"
+        },
+        {
+          "id": "euronews",
+          "tier": "news",
+          "publisher": "Euronews",
+          "title": "US banking app users report widespread outages linked to software bugs",
+          "url": "https://www.euronews.com/2026/11/17/us-banking-app-users-report-outages-from-software-bugs",
+          "published_at": "2026-11-17T05:25:00Z"
+        }
+      ],
+      "timeline": [
+        {
+          "at": "2026-11-16T14:00:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "cbs",
+          "text": "Monday morning ET: customers begin reporting trouble accessing online services (exact time not given)."
+        },
+        {
+          "at": "2026-11-16T19:00:00Z",
+          "evidence": "attributed",
+          "source": "cbs",
+          "text": "2 p.m. ET: about 4,800 Downdetector reports for Chase, the most of any bank. Euronews says reports peaked around this time."
+        },
+        {
+          "at": "2026-11-16T19:18:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "aj",
+          "text": "Chase (quoted): 'Due to a technical issue, some transactions are taking longer than usual to complete'; customers still have access to accounts and funds."
+        },
+        {
+          "at": "2026-11-16T21:00:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "cbs",
+          "text": "Other institutions respond (times not stated): Bank of America says its systems operated normally; U.S. Bank says it was not directly affected but Zelle transfers to other institutions could be delayed; Capital One says it was not affected; Zelle says it was operating as it should."
+        },
+        {
+          "at": "2026-11-16T22:00:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "cbs",
+          "text": "Chase on social media: a software bug affected other institutions when Chase was a party to transactions involving other banks; it was not systemic."
+        },
+        {
+          "at": "2026-11-17T11:00:00Z",
+          "approx": true,
+          "evidence": "attributed",
+          "source": "cbs",
+          "text": "Early Tuesday: Downdetector shows service back to normal at the banks and Zelle."
+        }
+      ],
+      "claims": [
+        {
+          "claim": "The disruption was a technical issue (a software bug), not a cyberattack.",
+          "claimant": "JPMorgan Chase spokesperson (quoted by CBS and Al Jazeera)",
+          "date": "2026-11-16",
+          "verdict": "supported",
+          "source": "cbs",
+          "rationale": "Chase's own statement, reported independently by two outlets; CNBC separately cited a source saying bad actors did not appear to be involved. The underlying defect has not been described publicly."
+        },
+        {
+          "claim": "'Customers of at least 4 major US banks report outages.'",
+          "claimant": "Yahoo News syndicated headline",
+          "date": "2026-11-16",
+          "verdict": "misleading",
+          "source": "yahoo4",
+          "rationale": "It accurately describes Downdetector complaint spikes. But Bank of America said its systems ran normally, U.S. Bank said it was not directly affected, and Chase said its bug touched transactions with other banks. 'Outages at four banks' overstates the confirmed picture."
+        },
+        {
+          "claim": "Bank of America had an outage.",
+          "claimant": "Euronews and Al Jazeera lists based on Downdetector",
+          "date": "2026-11-16",
+          "verdict": "contradicted",
+          "source": "euronews",
+          "rationale": "Bank of America said its systems operated normally (CBS). Its customers could still have seen delays on transfers involving Chase, so the crowd reports and the bank's statement can both be partly true."
+        },
+        {
+          "claim": "The bank outages came 'days after Microsoft issues' (implied link).",
+          "claimant": "Yahoo News syndicated headline",
+          "date": "2026-11-16",
+          "verdict": "misleading",
+          "source": "yahoo4",
+          "rationale": "The events are close in time only. Chase attributed its problem to its own software bug, and no source reviewed links it to the Microsoft or FAA incidents."
+        }
+      ]
+    }
+  ]
+}
